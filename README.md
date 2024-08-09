@@ -1,23 +1,6 @@
-
-
-<p align="center">
-    <br/>
-    <picture> 
-        <source media="(prefers-color-scheme: dark)" srcset="https://github.com/xenova/transformers.js/assets/26504141/bd047e0f-aca9-4ff7-ba07-c7ca55442bc4" width="500" style="max-width: 100%;">
-        <source media="(prefers-color-scheme: light)" srcset="https://github.com/xenova/transformers.js/assets/26504141/84a5dc78-f4ea-43f4-96f2-b8c791f30a8e" width="500" style="max-width: 100%;">
-        <img alt="transformers.js javascript library logo" src="https://github.com/xenova/transformers.js/assets/26504141/84a5dc78-f4ea-43f4-96f2-b8c791f30a8e" width="500" style="max-width: 100%;">
-    </picture>
-    <br/>
-</p>
-
-<p align="center">
-    <a href="https://www.npmjs.com/package/@xenova/transformers"><img alt="NPM" src="https://img.shields.io/npm/v/@xenova/transformers"></a>
-    <a href="https://www.npmjs.com/package/@xenova/transformers"><img alt="NPM Downloads" src="https://img.shields.io/npm/dw/@xenova/transformers"></a>
-    <a href="https://www.jsdelivr.com/package/npm/@xenova/transformers"><img alt="jsDelivr Hits" src="https://img.shields.io/jsdelivr/npm/hw/@xenova/transformers"></a>
-    <a href="https://github.com/xenova/transformers.js/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/xenova/transformers.js?color=blue"></a>
-    <a href="https://huggingface.co/docs/transformers.js/index"><img alt="Documentation" src="https://img.shields.io/website/http/huggingface.co/docs/transformers.js/index.svg?down_color=red&down_message=offline&up_message=online"></a>
-</p>
-
+> [!NOTE]
+> This is a forked version of [Transformers.js](https://github.com/huggingface/transformers) and you likely are not looking for this
+> as it is specially used in the AnythingLLM Desktop application.
 
 State-of-the-art Machine Learning for the web. Run 🤗 Transformers directly in your browser, with no need for a server!
 

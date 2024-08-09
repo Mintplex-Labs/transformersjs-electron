@@ -4212,6 +4212,8 @@ export class WhisperTokenizer extends PreTrainedTokenizer {
      * The corresponding language id token is appended to the start of the sequence for multilingual
      * speech recognition and speech translation tasks, e.g. for "Spanish" the token "<|es|>" is appended
      * to the start of sequence.
+     * @param {string} [options.languageFallback] When a lang is invalid - the languae **code** to fall back to "en", "es", "fr"...
+     * to prevent a thrown exception
      * @param {string} [options.task] Task identifier to append at the start of sequence (if any).
      * This should be used for mulitlingual fine-tuning, with "transcribe" for speech recognition and
      * "translate" for speech translation.
@@ -4222,6 +4224,7 @@ export class WhisperTokenizer extends PreTrainedTokenizer {
         language = null,
         task = null,
         no_timestamps = true,
+        languageFallback = null,
     } = {}) {
 
         // <|lang_id|> <|task|> <|notimestamps|>
@@ -4244,14 +4247,22 @@ export class WhisperTokenizer extends PreTrainedTokenizer {
 
                 } else {
                     // User provided something that is not a language code or name
-                    const is_language_code = language.length === 2;
-                    const langs = is_language_code ? WHISPER_LANGUAGE_MAPPING.keys() : WHISPER_LANGUAGE_MAPPING.values();
+                    // But provided a fallback we know is right and can use.
+                    if (!!languageFallback) {
+                        console.log(`Language "${language}" is not supported. Falling back to ${languageFallback}`);
+                        language_code = languageFallback;
+                    } else {
+                        // User provided something that is not a language code or name
+                        // and they have left us no choice but to exit.
+                        const is_language_code = language.length === 2;
+                        const langs = is_language_code ? WHISPER_LANGUAGE_MAPPING.keys() : WHISPER_LANGUAGE_MAPPING.values();
 
-                    throw new Error(`Language "${language}" is not supported. Must be one of: ${JSON.stringify(langs)}`);
+                        throw new Error(`Language "${language}" is not supported. Must be one of: ${JSON.stringify(langs)}`);
+                    }
                 }
             }
 
-            const language_token_id = this.model.tokens_to_ids.get(`<|${language_code}|>`);
+            let language_token_id = this.model.tokens_to_ids.get(`<|${language_code}|>`);
             if (language_token_id === undefined) {
                 throw new Error(`Unable to find language "${language_code}" in model vocabulary. Please report this issue at https://github.com/xenova/transformers.js/issues/new/choose.`)
             }
